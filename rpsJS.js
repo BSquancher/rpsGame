@@ -7,28 +7,30 @@ const matchButton = document.querySelector("#matchButton"); // play an entire ma
 
 const log = document.querySelector("#scoreBoard") //scoreBoard Log
 
-//On click of button it will ask you to type your answer
+//On click of button it will ask you to type your answer make this a function
 
-roundButton.addEventListener("click", () =>{
+function getHumanChoice(){
   let sign = prompt("Choose ROCK, PAPER OR SCISSORS!");
 
+
     if (sign === null){
-      log.innerText = "Please, choose your character!";
+      scoreBoard.innerText = "Please, choose your character!";
     } else if (sign.toLowerCase() === ""){
-      log.innerText = "Please, make a selection";
+      scoreBoard.innerText = "Please, make a selection";
     } else if (sign.toUpperCase() === "ROCK"){
-      log.innerText = "ROCK!";
+      scoreBoard.innerText = "ROCK!";
+      humanHand = sign;
     } else if (sign.toUpperCase() === "PAPER"){
-      log.innerText = "PAPER!";
+      scoreBoard.innerText = "PAPER!";
+      humanHand = sign;
     } else if (sign.toUpperCase() === "SCISSORS"){
-      log.innerText = "SCISSORS!";
+      scoreBoard.innerText = "SCISSORS!";
+      humanHand = sign;
     } else {
-      log.innerText = `${sign} is NOT a valid selection!`;
+      scoreBoard.innerText = `${sign} is NOT a valid selection!`;
     }
-
-});
-
-
+return humanHand;
+}
 
 
 
@@ -57,12 +59,11 @@ if (selectionNumber == 0){
   return computerHand;
 }
 
-function getHumanChoice(){
 
-  prompt("Please Type ROCK PAPER OR SCISSORS!")
-}
 
 computerHand = getComputerChoice();
+humanHand = getHumanChoice();
+
 
 console.log(computerHand);
 console.log(humanHand);
