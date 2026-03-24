@@ -1,17 +1,17 @@
 
 let computerHand = ""; //computerHand is a STRING that will be the computer's selection
-let humanHand = ""; //humnaHand is a STRING that will be the USER's selection
+let humanHand = 5; //humnaHand is a STRING that will be the USER's selection
 
 const roundButton = document.querySelector("#roundButton"); //play a single round
 const matchButton = document.querySelector("#matchButton"); // play an entire match (5 rounds)
 
-const log = document.querySelector("#scoreBoard") //scoreBoard Log
+const scoreBoard = document.querySelector("#scoreBoard") //scoreBoard Log
 
 //On click of button it will ask you to type your answer make this a function
 
 function getHumanChoice(){
   let sign = prompt("Choose ROCK, PAPER OR SCISSORS!");
-
+  
 
     if (sign === null){
       scoreBoard.innerText = "Please, choose your character!";
@@ -19,13 +19,13 @@ function getHumanChoice(){
       scoreBoard.innerText = "Please, make a selection";
     } else if (sign.toUpperCase() === "ROCK"){
       scoreBoard.innerText = "ROCK!";
-      humanHand = sign;
+      humanHand = 0;
     } else if (sign.toUpperCase() === "PAPER"){
       scoreBoard.innerText = "PAPER!";
-      humanHand = sign;
+      humanHand = 1;
     } else if (sign.toUpperCase() === "SCISSORS"){
       scoreBoard.innerText = "SCISSORS!";
-      humanHand = sign;
+      humanHand = 2;
     } else {
       scoreBoard.innerText = `${sign} is NOT a valid selection!`;
     }
@@ -62,8 +62,11 @@ if (selectionNumber == 0){
 
 
 computerHand = getComputerChoice();
-humanHand = getHumanChoice();
 
+roundButton.addEventListener("click", () => {
+  humanHand = getHumanChoice();
 
 console.log(computerHand);
 console.log(humanHand);
+
+});
