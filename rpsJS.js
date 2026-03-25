@@ -92,14 +92,15 @@ switch(computerHand){
   computerChoice = 2;
   break;
 }
-console.log(computerHand);
-console.log(humanHand);
-console.log(computerChoice);
+// console.log(computerHand);
+// console.log(humanHand);
+// console.log(computerChoice);
 
 playRound(humanHand, computerChoice);
 
 });
 
+//play a round of ROCK PAPER SCISSORS
 function playRound(humanHand, computerChoice){
 
   if (humanHand === computerChoice){
@@ -154,3 +155,43 @@ function playRound(humanHand, computerChoice){
     scoreBoard.innerText = "Lost 5 rounds! MATCH OVER";
   }
 }
+//BUTTON FOR ENTIRE MATCH
+matchButton.addEventListener("click", () => {
+
+  humanHand = getHumanChoice();
+  computerHand = getComputerChoice();
+
+  switch(computerHand){
+    case 'ROCK!':
+      computerChoice = 0;
+      break;
+
+    case 'PAPER!':
+      computerChoice = 1;
+      break;
+
+    case 'SCISSORS!':
+      computerChoice = 2;
+      break;
+} //END OF SWITCH
+playMatch(humanHand, computerChoice);
+
+
+});
+
+function playMatch (humanHand, computerChoice){
+
+if (humanScore === 5){
+  roundResult.innerText = "WINNER WINNER CHICKEN DINNER!"
+  scoreBoard.innerText = "Won 5 rounds! MATCH OVER";
+
+} else if (computerScore === 5){
+  roundResult.innerText = "YOU LOSE!"
+  scoreBoard.innerText = "Lost 5 rounds! MATCH OVER";
+
+} else {
+  while(humanScore != 5 || computerScore != 5){
+  playRound(humanHand, computerChoice);
+}// WHILE LOOP
+} //ELSE STATEMENT
+} //END OF FUNCTION
