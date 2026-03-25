@@ -143,4 +143,14 @@ function playRound(humanHand, computerChoice){
   else{
     console.log("ERROR!");
   }
+
+  if (humanScore === 5){
+    roundResult.innerText = "WINNER WINNER CHICKEN DINNER!"
+    scoreBoard.innerText = "Won 5 rounds! MATCH OVER";
+  }
+
+  if (computerScore === 5){
+    roundResult.innerText = "YOU LOSE!"
+    scoreBoard.innerText = "Lost 5 rounds! MATCH OVER";
+  }
 }
