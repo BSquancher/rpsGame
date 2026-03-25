@@ -2,32 +2,43 @@
 let computerHand = ""; //computerHand is a STRING that will be the computer's selection
 let humanHand = 5; //humnaHand is a STRING that will be the USER's selection
 
+
+// Hands to values to compare
+
+let computerChoice = 5;
+//scoreeboard variables
+
+let humanScore = 0;
+let computerScore = 0;
+
+
 const roundButton = document.querySelector("#roundButton"); //play a single round
 const matchButton = document.querySelector("#matchButton"); // play an entire match (5 rounds)
 
-const scoreBoard = document.querySelector("#scoreBoard") //scoreBoard Log
-
+const playerChoice = document.querySelector("#playerChoice"); //scoreBoard Log
+const scoreBoard= document.querySelector("#scoreBoard");
+const roundResult = document.querySelector("#roundResult");
 //On click of button it will ask you to type your answer make this a function
 
 function getHumanChoice(){
   let sign = prompt("Choose ROCK, PAPER OR SCISSORS!");
-  
+
 
     if (sign === null){
-      scoreBoard.innerText = "Please, choose your character!";
+      playerChoice.innerText = "Please, choose your character!";
     } else if (sign.toLowerCase() === ""){
-      scoreBoard.innerText = "Please, make a selection";
+      playerChoice.innerText = "Please, make a selection";
     } else if (sign.toUpperCase() === "ROCK"){
-      scoreBoard.innerText = "ROCK!";
+      playerChoice.innerText = "Player selected: ROCK!";
       humanHand = 0;
     } else if (sign.toUpperCase() === "PAPER"){
-      scoreBoard.innerText = "PAPER!";
+      playerChoice.innerText = "Player selected: PAPER!";
       humanHand = 1;
     } else if (sign.toUpperCase() === "SCISSORS"){
-      scoreBoard.innerText = "SCISSORS!";
+      playerChoice.innerText = "Player selected: SCISSORS!";
       humanHand = 2;
     } else {
-      scoreBoard.innerText = `${sign} is NOT a valid selection!`;
+      playerChoice.innerText = `${sign} is NOT a valid selection!`;
     }
 return humanHand;
 }
@@ -61,12 +72,75 @@ if (selectionNumber == 0){
 
 
 
-computerHand = getComputerChoice();
+// computerHand = getComputerChoice();
 
+//Makes the function execute when button is clicked
 roundButton.addEventListener("click", () => {
   humanHand = getHumanChoice();
+  computerHand = getComputerChoice();
 
+switch(computerHand){
+  case 'ROCK!':
+  computerChoice = 0;
+  break;
+
+  case 'PAPER!':
+  computerChoice = 1;
+  break;
+
+  case 'SCISSORS!':
+  computerChoice = 2;
+  break;
+}
 console.log(computerHand);
 console.log(humanHand);
+console.log(computerChoice);
+
+playRound(humanHand, computerChoice);
 
 });
+
+function playRound(humanHand, computerChoice){
+
+  if (humanHand === computerChoice){
+    roundResult.innerText = "DRAW!";
+    scoreBoard.innerText = `SCORE: Player: ${humanScore} | Computer ${computerScore}`;
+  } else if (humanHand === 0 && computerChoice === 1){
+    //player LOST
+    roundResult.innerText = "PAPER covers ROCK!, ROUND LOST"
+    computerScore +=1;
+    scoreBoard.innerText = `SCORE: Player: ${humanScore} | Computer ${computerScore}`;
+  } else if (humanHand === 0 && computerChoice === 2){
+    //player WIN
+    roundResult.innerText = "ROCK breaks SCISSORS! , ROUND WON!!!"
+    humanScore +=1;
+    scoreBoard.innerText = `SCORE: Player: ${humanScore} | Computer ${computerScore}`;
+  }
+  else if (humanHand === 1 && computerChoice === 0){
+    //player WIN
+    roundResult.innerText = "PAPER covers ROCK!, ROUND WON!!!"
+    humanScore +=1;
+    scoreBoard.innerText = `SCORE: Player: ${humanScore} | Computer ${computerScore}`;
+  }
+  else if (humanHand === 1 && computerChoice === 2){
+    //player lose
+    roundResult.innerText = "SCISSORS cuts PAPER!, ROUND LOST"
+    computerScore +=1;
+    scoreBoard.innerText = `SCORE: Player: ${humanScore} | Computer ${computerScore}`;
+  }
+  else if (humanHand === 2 && computerChoice === 0){
+    //player lose
+    roundResult.innerText = "ROCK breaks SCISSORS!, ROUND LOST"
+    computerScore +=1;
+    scoreBoard.innerText = `SCORE: Player: ${humanScore} | Computer ${computerScore}`;
+  }
+  else if (humanHand === 2 && computerChoice === 1){
+    //player win
+    roundResult.innerText = "SCISSORS cuts PAPER!, ROUND WON!!!"
+    humanScore +=1;
+    scoreBoard.innerText = `SCORE: Player: ${humanScore} | Computer ${computerScore}`;
+  }
+  else{
+    console.log("ERROR!");
+  }
+}
