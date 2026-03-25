@@ -10,6 +10,7 @@ let computerChoice = 5;
 
 let humanScore = 0;
 let computerScore = 0;
+let rounds = 0;
 
 
 const roundButton = document.querySelector("#roundButton"); //play a single round
@@ -157,7 +158,8 @@ function playRound(humanHand, computerChoice){
 }
 //BUTTON FOR ENTIRE MATCH
 matchButton.addEventListener("click", () => {
-
+humanScore = 0;
+computerScore = 0;
   humanHand = getHumanChoice();
   computerHand = getComputerChoice();
 
@@ -180,18 +182,24 @@ playMatch(humanHand, computerChoice);
 });
 
 function playMatch (humanHand, computerChoice){
+rounds = 0;
+while (rounds < 10){
+playRound(humanHand, computerChoice);
+rounds++;
+}
 
-if (humanScore === 5){
+if (humanScore > 5){
   roundResult.innerText = "WINNER WINNER CHICKEN DINNER!"
   scoreBoard.innerText = "Won 5 rounds! MATCH OVER";
 
-} else if (computerScore === 5){
+} else if (computerScore > 5){
   roundResult.innerText = "YOU LOSE!"
   scoreBoard.innerText = "Lost 5 rounds! MATCH OVER";
 
 } else {
-  while(humanScore != 5 || computerScore != 5){
-  playRound(humanHand, computerChoice);
-}// WHILE LOOP
+  scoreBoard.innerText = "somethingHappened";
 } //ELSE STATEMENT
+
+console.log(humanScore);
+console.log(computerScore);
 } //END OF FUNCTION
